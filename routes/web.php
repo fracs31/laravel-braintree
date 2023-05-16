@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //Gateway
+    $gateway = new Braintree\Gateway([
+        'environment' => getenv('BT_ENVIRONMENT'),
+        'merchantId' => getenv('BT_MERCHANT_ID'),
+        'publicKey' => getenv('BT_PUBLIC_KEY'),
+        'privateKey' => getenv('BT_PRIVATE_KEY')
+    ]);
+    $token = $gateway->ClientToken()->generate(); //token
+    return view('welcome', [
+        'token' => $token, //token
+    ]);
 });

@@ -21,22 +21,6 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-        </div>
-
         {{-- Contenuto --}}
         <div class="content">
             <form method="post" id="payment-form" action="#">
@@ -57,12 +41,12 @@
                 <button class="button" type="submit"><span>Test Transaction</span></button>
             </form>
         </div>
-        
+
         {{-- Script --}}
         <script src="https://js.braintreegateway.com/web/dropin/1.37.0/js/dropin.min.js"></script>
         <script>
             var form = document.querySelector('#payment-form');
-            var client_token = "<?php echo($gateway->ClientToken()->generate()); ?>";
+            var client_token = "{{ $token }}";
 
             braintree.dropin.create({
             authorization: client_token,
