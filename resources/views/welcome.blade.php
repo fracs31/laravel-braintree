@@ -23,7 +23,24 @@
     <body class="antialiased">
         {{-- Contenuto --}}
         <div class="content">
-            <form method="post" id="payment-form" action="#">
+            {{-- Messaggio di successo --}}
+            @if (session('success_message'))
+                <div>
+                    {{ session('success_message') }}
+                </div>
+            @endif
+            {{-- Messaggio di errore --}}
+            @if (count($errors) > 0)
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form method="post" id="payment-form" action="{{ url('/checkout') }}">
+                @csrf
                 <section>
                     <label for="amount">
                         <span class="input-label">Amount</span>
