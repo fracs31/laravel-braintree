@@ -44,6 +44,12 @@ Route::post("/checkout", function(Request $request) {
     $result = $gateway->transaction()->sale([
         'amount' => $amount,
         'paymentMethodNonce' => $nonce,
+        //Cliente
+        'customer' => [
+            'firstName' => 'Mario', //nome
+            'lastName' => 'Rossi', //cognome
+            'email' => 'mariorossi@gmail.com' //email
+        ],
         'options' => [
             'submitForSettlement' => true
         ]
