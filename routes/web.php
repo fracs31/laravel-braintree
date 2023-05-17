@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request; //request
+use App\Http\Controllers\PaymentController; //Payment controller
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use Illuminate\Http\Request; //request
 
 Route::get('/', function () {
     //Gateway
-    $gateway = new Braintree\Gateway([
+    /*$gateway = new Braintree\Gateway([
         'environment' => getenv('BT_ENVIRONMENT'),
         'merchantId' => getenv('BT_MERCHANT_ID'),
         'publicKey' => getenv('BT_PUBLIC_KEY'),
@@ -25,8 +26,10 @@ Route::get('/', function () {
     $token = $gateway->ClientToken()->generate(); //token
     return view('welcome', [
         'token' => $token, //token
-    ]);
+    ]);*/
 });
+
+Route::resource('payments', PaymentController::class); //rotte Payment
 
 //Hosted
 Route::get('/hosted', function () {
