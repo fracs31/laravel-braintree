@@ -14,8 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); //id
+            $table->double('amount', 7, 2); //quantità
+            $table->dateTime('date'); //data
+            $table->string('card_type', 50); //tipologia della carta
+            $table->string('cardholder_name', 200); //proprietario della carta
+            $table->string('card_number', 16); //numero della carta
+            $table->date('card_expiration'); //scadenza della carta
+            $table->string('card_cvv', 3); //cvv della carta
         });
     }
 
