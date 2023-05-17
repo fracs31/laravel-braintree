@@ -14,7 +14,7 @@
                 font-family: 'Nunito', sans-serif;
             }
             /* Campi di Braintree */
-            #card-number, #cvv, #expiration-date {
+            #card-number, #cvv, #expiration-date, #cardholder-name {
                 height: 40px;
                 padding: 5px;
                 border: 1px solid black;
@@ -64,7 +64,10 @@
                     <div class="input-wrapper amount-wrapper">
                         <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
                     </div>
-                </label>                
+                </label>
+                {{-- Possessore della carta --}}
+                <label for="cardholder-name">Card holder</label>
+                <div id="cardholder-name"></div>    
                 {{-- Numero della carta --}}
                 <label for="card-number">Card Number</label>
                 <div id="card-number"></div>
@@ -115,17 +118,21 @@
                 },
                 fields: {
                     number: {
-                    container: '#card-number',
-                    placeholder: '4111 1111 1111 1111'
+                        container: '#card-number',
+                        placeholder: '4111 1111 1111 1111'
                     },
                     cvv: {
-                    container: '#cvv',
-                    placeholder: '123'
+                        container: '#cvv',
+                        placeholder: '123'
                     },
                     expirationDate: {
-                    container: '#expiration-date',
-                    placeholder: '10/2022'
-                    }
+                        container: '#expiration-date',
+                        placeholder: '10/2022'
+                    },
+                    cardholderName: {
+                        container: '#cardholder-name',
+                        placeholder: 'Card holder'
+                    },
                 }
             }, 
             function (hostedFieldsErr, hostedFieldsInstance) {

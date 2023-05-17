@@ -55,10 +55,9 @@ Route::post("/checkout", function(Request $request) {
 
     $amount = $request->amount; //quantità
     $nonce = $request->payment_method_nonce; //nonce
-    $firstName = $request->first_name; //nome
-    $lastName = $request->last_name; //cognome
-    $email = $request->email; //email
-    
+    $firstName = isset($request->first_name) ? $request->first_name : "Mario"; //nome
+    $lastName = isset($request->last_name) ? $request->last_name : "Rossi"; //cognome
+    $email = isset($request->email) ? $request->email : "mariorossi@gmail.com"; //email
     $result = $gateway->transaction()->sale([
         'amount' => $amount, //quantità
         'paymentMethodNonce' => $nonce,//nonce
@@ -66,7 +65,7 @@ Route::post("/checkout", function(Request $request) {
         'customer' => [
             'firstName' => $firstName, //nome
             'lastName' => $lastName, //cognome
-            'email' => $email //email
+            'email' => $email, //email
         ],
         'options' => [
             'submitForSettlement' => true
