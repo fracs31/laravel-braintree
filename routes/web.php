@@ -53,17 +53,20 @@ Route::post("/checkout", function(Request $request) {
         'privateKey' => getenv('BT_PRIVATE_KEY')
     ]);
 
-    $amount = $request->amount;
-    $nonce = $request->payment_method_nonce;
+    $amount = $request->amount; //quantità
+    $nonce = $request->payment_method_nonce; //nonce
+    $firstName = $request->first_name; //nome
+    $lastName = $request->last_name; //cognome
+    $email = $request->email; //email
     
     $result = $gateway->transaction()->sale([
-        'amount' => $amount,
-        'paymentMethodNonce' => $nonce,
+        'amount' => $amount, //quantità
+        'paymentMethodNonce' => $nonce,//nonce
         //Cliente
         'customer' => [
-            'firstName' => 'Mario', //nome
-            'lastName' => 'Rossi', //cognome
-            'email' => 'mariorossi@gmail.com' //email
+            'firstName' => $firstName, //nome
+            'lastName' => $lastName, //cognome
+            'email' => $email //email
         ],
         'options' => [
             'submitForSettlement' => true

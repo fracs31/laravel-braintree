@@ -43,23 +43,40 @@
             {{-- Form --}}
             <form action="{{ url('/checkout') }}" id="payment-form" method="post">
                 @csrf
+                {{-- Nome --}}
+                <label for="first_name">Nome</label>
+                <div>
+                    <input type="text" name="first_name">
+                </div>
+                {{-- Cognome --}}
+                <label for="last_name">Cognome</label>
+                <div>
+                    <input type="text" name="last_name">
+                </div>
+                {{-- Email --}}
+                <label for="email">Email</label>
+                <div>
+                    <input type="email" name="email">
+                </div>
+                {{-- Quantità --}}
                 <label for="amount">
                     <span class="input-label">Amount</span>
                     <div class="input-wrapper amount-wrapper">
                         <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
                     </div>
-                </label>
-
+                </label>                
+                {{-- Numero della carta --}}
                 <label for="card-number">Card Number</label>
                 <div id="card-number"></div>
-          
+                {{-- CVV --}}
                 <label for="cvv">CVV</label>
                 <div id="cvv"></div>
-          
+                {{-- Data di scadenza --}}
                 <label for="expiration-date">Expiration Date</label>
                 <div id="expiration-date"></div>
-          
+                {{-- Nonce --}}
                 <input id="nonce" name="payment_method_nonce" type="hidden" />
+                {{-- Submit --}}
                 <button class="button" type="submit"><span>Test Transaction</span></button>
             </form>
         </div>
