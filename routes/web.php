@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request; //request
-use App\Http\Controllers\PaymentController; //Payment controller
 use App\Models\Order; //model
 
 /*
@@ -29,8 +28,6 @@ Route::get('/', function () {
         'token' => $token, //token
     ]);*/
 });
-
-Route::resource('payments', PaymentController::class); //rotte Payment
 
 //Hosted
 Route::get('/hosted', function () {
