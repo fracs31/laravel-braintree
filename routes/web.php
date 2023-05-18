@@ -101,6 +101,8 @@ Route::post("/checkout", function(Request $request) {
     
     if ($result->success) {
         $transaction = $result->transaction;
+        $newOrder->status = 1; //cambio la stato dell'ordine in successo
+        $newOrder->save(); //invio le informazio al database
         //header("Location: " . $baseUrl . "transaction.php?id=" . $transaction->id);
         return back()->with('success_message', 'Transaction successful. The ID is: ' . $transaction->id);
     } else {
