@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request; //request
 use App\Http\Controllers\PaymentController; //Payment controller
+use App\Models\Order; //model
 
 /*
 |--------------------------------------------------------------------------
@@ -58,13 +59,23 @@ Route::post("/checkout", function(Request $request) {
 
     $amount = $request->amount; //quantità
     $nonce = $request->payment_method_nonce; //nonce
-    $date = date("Y-m-d h:i:sa"); //data
+    $date = date("Y-m-d h:i:s"); //data
     $firstName = isset($request->first_name) ? $request->first_name : "Mario"; //nome
     $lastName = isset($request->last_name) ? $request->last_name : "Rossi"; //cognome
     $email = isset($request->email) ? $request->email : "mariorossi@gmail.com"; //email
     $phone = isset($request->phone) ? $request->phone : "1234567890"; //telefono
     $address = isset($request->address) ? $request->address : "Via Genova 1"; //indirizzo
-    $postal_code = isset($request->postal_code) ? $request->postal_code : "10100"; //codice postale
+    $postalCode = isset($request->postalCode) ? $request->postalCode : "10100"; //codice postale
+
+    $newOrder = new Order(); //nuovo ordine
+    $newOrder->date = $date; //data
+    $newOrder->first_name = $firstName; //nome del cliente
+    $newOrder->last_name = $lastName; //cognome del cliente
+    $newOrder->email = $email; //email del cliente
+    $newOrder->phone = $phone; //telefono del cliente
+    $newOrder->address = $address; //indirizzo del cliente
+    $newOrder->postal_code = $postalCode; //codice postale del cliente
+    $newOrder->save(); //salvo i dati nel database
 
     $result = $gateway->transaction()->sale([
         'amount' => $amount, //quantità
@@ -74,6 +85,14 @@ Route::post("/checkout", function(Request $request) {
             'firstName' => $firstName, //nome
             'lastName' => $lastName, //cognome
             'email' => $email, //email
+            'phone' => $phone, //telefono
+        ],
+        //Addebito
+        'billing' => [
+            'firstName' => $firstName, //nome
+            'lastName' => $lastName, //cognome
+            'streetAddress' => $address, //indirizzo
+            'postalCode' => $postalCode, //codice postale
         ],
         'options' => [
             'submitForSettlement' => true
