@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("email"); //email del cliente
             $table->string("phone", 20); //telefono del cliente
             $table->string("address", 255); //indirizzo del cliente
-            $table->string("cap", 5); //cap del cliente
+            $table->string("postal_code", 5); //codice postale del cliente
         });
     }
 

@@ -17,7 +17,7 @@ class Order extends Model
         'email',
         'phone',
         'address',
-        'cap'
+        'postal_code'
     ];
     public $timestamps = false; //ignora i "timestamps"
 }

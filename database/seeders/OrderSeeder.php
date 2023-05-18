@@ -26,7 +26,7 @@ class OrderSeeder extends Seeder
             $newOrder->email = $faker->email(); //email del cliente
             $newOrder->phone = $faker->randomNumber(9, true); //telefono del cliente
             $newOrder->address = $faker->sentence(3); //indirizzo del cliente
-            $newOrder->cap = $faker->randomNumber(5, true); //cap del cliente
+            $newOrder->postal_code = $faker->randomNumber(5, true); //codice postale del cliente
             $newOrder->save(); //salvo i dati nel database
         }
     }   
