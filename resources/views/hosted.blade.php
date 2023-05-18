@@ -13,6 +13,11 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            /* Container */
+            .container {
+                max-width: 800px;
+                margin: 0px auto
+            }
             /* Campi di Braintree */
             #card-number, #cvv, #expiration-date, #cardholder-name {
                 height: 40px;
@@ -22,8 +27,8 @@
         </style>
     </head>
     <body class="antialiased">
-        {{-- Contenuto --}}
-        <div class="content">
+        {{-- Container --}}
+        <div class="container">
             {{-- Messaggio di successo --}}
             @if (session('success_message'))
                 <div>
@@ -40,6 +45,10 @@
                     </ul>
                 </div>
             @endif
+            {{-- Titolo --}}
+            <h1>
+                Pagamento
+            </h1>
             {{-- Form --}}
             <form action="{{ url('/checkout') }}" id="payment-form" method="post">
                 @csrf
@@ -57,6 +66,21 @@
                 <label for="email">Email</label>
                 <div>
                     <input type="email" name="email">
+                </div>
+                {{-- Telefono --}}
+                <label for="phone">Telefono</label>
+                <div>
+                    <input type="text" name="phone">
+                </div>
+                {{-- Email --}}
+                <label for="address">Indirizzo</label>
+                <div>
+                    <input type="text" name="address">
+                </div>
+                {{-- Codice postale --}}
+                <label for="postal_code">Codice postale</label>
+                <div>
+                    <input type="text" name="postal_code">
                 </div>
                 {{-- Quantità --}}
                 <label for="amount">
